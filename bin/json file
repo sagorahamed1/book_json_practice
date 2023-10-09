@@ -1,0 +1,26 @@
+[
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "price": 300,
+    "publish_year": 1960
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "price": 280.50,
+    "publish_year": 1949
+  },
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "price": 319.50,
+    "publish_year": 1925
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "price": 300,
+    "publish_year": 1813
+  }
+]

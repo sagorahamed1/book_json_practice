@@ -1,0 +1,60 @@
+import 'dart:convert';
+
+import 'package:bkash_nogod/json_class.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class JsonDataItem extends StatefulWidget {
+  const JsonDataItem({super.key});
+
+  @override
+  State<JsonDataItem> createState() => _JsonDataItemState();
+}
+
+class _JsonDataItemState extends State<JsonDataItem> {
+
+  
+  Future <List<Book>> getdata ()async{
+    final urlname = Uri.parse("https://fakestoreapi.com/products");
+    final myData = await http.get(urlname);
+
+    final List<dynamic> jsondecede = jsonDecode(myData.body);
+    // print(jsondecede);
+    // List <Book> listdata = jsondecode.map((e) => BookData.fromMap(e)).toList();
+    //    List <Book> list = jsondecede.map((e) => Book.fromMap(e)).toList();
+    // List <Book> list = jsondecede.map((e) => Book.fromjson(e)).toList();
+   
+   
+   
+    List <Book> list = [];
+    for(var itme in jsondecede){
+      var book = Book(id: itme['id'], title: itme['title']);
+      list.add(book);
+    }
+
+    return list;
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder(
+        future: getdata(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        title: Text("${snapshot.data?[index].id.toString()}"),
+                        subtitle: Text("${snapshot.data?[index].title}"),
+                      ),
+                    );
+                  },);
+            }
+            return CircularProgressIndicator();
+          },),
+    );
+  }
+}
